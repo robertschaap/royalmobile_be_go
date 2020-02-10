@@ -1,3 +1,5 @@
 module github.com/robertschaap/royalmobile_go_be
 
 go 1.13
+
+require github.com/gorilla/mux v1.7.3 // indirect
