@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "manufacturer": "Apple",
+    "model": "iPhone X",
+    "modelId": "apple-iphone-x",
+    "variants": [
+      {
+        "id": 1,
+        "variantId": "apple-iphone-x-16gb-silver",
+        "color": "silver",
+        "capacity": "16gb",
+        "is_in_stock": true,
+        "is_preorder": true,
+        "regular_price": "265",
+        "discounted_price": "239",
+        "has_discounts": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "manufacturer": "Apple",
+    "model": "iPhone X",
+    "modelId": "apple-iphone-x",
+    "variants": [
+      {
+        "id": 1,
+        "variantId": "apple-iphone-x-16gb-silver",
+        "color": "silver",
+        "capacity": "16gb",
+        "is_in_stock": true,
+        "is_preorder": true,
+        "regular_price": "265",
+        "discounted_price": "239",
+        "has_discounts": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "manufacturer": "Apple",
+    "model": "iPhone X",
+    "modelId": "apple-iphone-x",
+    "variants": [
+      {
+        "id": 1,
+        "variantId": "apple-iphone-x-16gb-silver",
+        "color": "silver",
+        "capacity": "16gb",
+        "is_in_stock": true,
+        "is_preorder": true,
+        "regular_price": "265",
+        "discounted_price": "239",
+        "has_discounts": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "manufacturer": "Apple",
+    "model": "iPhone X",
+    "modelId": "apple-iphone-x",
+    "variants": [
+      {
+        "id": 1,
+        "variantId": "apple-iphone-x-16gb-silver",
+        "color": "silver",
+        "capacity": "16gb",
+        "is_in_stock": true,
+        "is_preorder": true,
+        "regular_price": "265",
+        "discounted_price": "239",
+        "has_discounts": true
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "manufacturer": "Apple",
+    "model": "iPhone X",
+    "modelId": "apple-iphone-x",
+    "variants": [
+      {
+        "id": 1,
+        "variantId": "apple-iphone-x-16gb-silver",
+        "color": "silver",
+        "capacity": "16gb",
+        "is_in_stock": true,
+        "is_preorder": true,
+        "regular_price": "265",
+        "discounted_price": "239",
+        "has_discounts": true
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "manufacturer": "Apple",
+    "model": "iPhone X",
+    "modelId": "apple-iphone-x",
+    "variants": [
+      {
+        "id": 1,
+        "variantId": "apple-iphone-x-16gb-silver",
+        "color": "silver",
+        "capacity": "16gb",
+        "is_in_stock": true,
+        "is_preorder": true,
+        "regular_price": "265",
+        "discounted_price": "239",
+        "has_discounts": true
+      }
+    ]
+  }
+]
