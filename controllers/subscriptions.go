@@ -13,4 +13,6 @@ func GetSubscriptions(w http.ResponseWriter, r *http.Request) {
 		Data:    "",
 		Message: "",
 	}
+
+	res.JSON(w)
 }
