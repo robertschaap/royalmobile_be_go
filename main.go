@@ -1,42 +1,45 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-type ApiResponse struct {
-	Status  string      `json:"status"`
-	Data    interface{} `json:"data"`
-	Message string      `json:"message"`
-}
-
-func (r *ApiResponse) JSON(w http.ResponseWriter) {
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(r)
-}
-
-func GetIndex(w http.ResponseWriter, r *http.Request) {
-	res := ApiResponse{"", "", ""}
+func getIndex(w http.ResponseWriter, r *http.Request) {
+	res := server.APIResponse{
+		Status:  "",
+		Data:    "",
+		Message: "",
+	}
 	res.JSON(w)
 }
 
-func GetProducts(w http.ResponseWriter, r *http.Request) {
-	res := ApiResponse{"", "", ""}
+func getProducts(w http.ResponseWriter, r *http.Request) {
+	res := server.APIResponse{
+		Status:  "",
+		Data:    "",
+		Message: "",
+	}
+
 	res.JSON(w)
 }
 
-func GetSubscriptions(w http.ResponseWriter, r *http.Request) {
-	res := ApiResponse{"", "", ""}
+func getSubscriptions(w http.ResponseWriter, r *http.Request) {
+	res := server.APIResponse{
+		Status:  "",
+		Data:    "",
+		Message: "",
+	}
+
 	res.JSON(w)
 }
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/api/", GetIndex)
-	r.HandleFunc("/api/products", GetProducts)
-	r.HandleFunc("/api/subscriptions", GetSubscriptions)
+	r.HandleFunc("/api/", getIndex)
+	r.HandleFunc("/api/products", getProducts)
+	r.HandleFunc("/api/subscriptions", getSubscriptions)
 	http.ListenAndServe(":4000", r)
 }
