@@ -17,20 +17,10 @@ func getIndex(w http.ResponseWriter, r *http.Request) {
 	res.JSON(w)
 }
 
-func getSubscriptions(w http.ResponseWriter, r *http.Request) {
-	res := server.APIResponse{
-		Status:  "",
-		Data:    "",
-		Message: "",
-	}
-
-	res.JSON(w)
-}
-
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/", getIndex)
 	r.HandleFunc("/api/products", controllers.GetProducts)
-	r.HandleFunc("/api/subscriptions", getSubscriptions)
+	r.HandleFunc("/api/subscriptions", controllers.GetSubscriptions)
 	http.ListenAndServe(":4000", r)
 }
