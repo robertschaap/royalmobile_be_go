@@ -3,14 +3,10 @@ package main
 import (
 	"net/http"
 
-	"github.com/gorilla/mux"
-	"github.com/robertschaap/royalmobile_go_be/controllers"
+	"github.com/robertschaap/royalmobile_go_be/router"
 )
 
 func main() {
-	r := mux.NewRouter()
-	r.HandleFunc("/api/", controllers.GetIndex)
-	r.HandleFunc("/api/products", controllers.GetProducts)
-	r.HandleFunc("/api/subscriptions", controllers.GetSubscriptions)
+	r := router.CreateRouter()
 	http.ListenAndServe(":4000", r)
 }
