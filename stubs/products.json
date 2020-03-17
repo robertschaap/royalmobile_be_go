@@ -3,11 +3,11 @@
     "id": 1,
     "manufacturer": "Apple",
     "model": "iPhone X",
-    "modelId": "apple-iphone-x",
+    "modelId": "apple-iphonex",
     "variants": [
       {
         "id": 1,
-        "variantId": "apple-iphone-x-16gb-silver",
+        "variantId": "apple-iphonex-16gb-silver",
         "color": "silver",
         "colorHex": "#ccc",
         "capacity": "16gb",
@@ -23,11 +23,11 @@
     "id": 2,
     "manufacturer": "Apple",
     "model": "iPhone X",
-    "modelId": "apple-iphone-x",
+    "modelId": "apple-iphonex",
     "variants": [
       {
         "id": 1,
-        "variantId": "apple-iphone-x-16gb-silver",
+        "variantId": "apple-iphonex-16gb-silver",
         "color": "silver",
         "colorHex": "#ccc",
         "capacity": "16gb",
@@ -43,11 +43,11 @@
     "id": 3,
     "manufacturer": "Apple",
     "model": "iPhone X",
-    "modelId": "apple-iphone-x",
+    "modelId": "apple-iphonex",
     "variants": [
       {
         "id": 1,
-        "variantId": "apple-iphone-x-16gb-silver",
+        "variantId": "apple-iphonex-16gb-silver",
         "color": "silver",
         "colorHex": "#ccc",
         "capacity": "16gb",
@@ -63,11 +63,11 @@
     "id": 4,
     "manufacturer": "Apple",
     "model": "iPhone X",
-    "modelId": "apple-iphone-x",
+    "modelId": "apple-iphonex",
     "variants": [
       {
         "id": 1,
-        "variantId": "apple-iphone-x-16gb-silver",
+        "variantId": "apple-iphonex-16gb-silver",
         "color": "silver",
         "colorHex": "#ccc",
         "capacity": "16gb",
@@ -83,11 +83,11 @@
     "id": 5,
     "manufacturer": "Apple",
     "model": "iPhone X",
-    "modelId": "apple-iphone-x",
+    "modelId": "apple-iphonex",
     "variants": [
       {
         "id": 1,
-        "variantId": "apple-iphone-x-16gb-silver",
+        "variantId": "apple-iphonex-16gb-silver",
         "color": "silver",
         "colorHex": "#ccc",
         "capacity": "16gb",
@@ -103,11 +103,11 @@
     "id": 6,
     "manufacturer": "Apple",
     "model": "iPhone X",
-    "modelId": "apple-iphone-x",
+    "modelId": "apple-iphonex",
     "variants": [
       {
         "id": 1,
-        "variantId": "apple-iphone-x-16gb-silver",
+        "variantId": "apple-iphonex-16gb-silver",
         "color": "silver",
         "colorHex": "#ccc",
         "capacity": "16gb",
