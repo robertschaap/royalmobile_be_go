@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "subscriptionId": "royalmobile-20gb-1year",
+    "durationId": "1year",
+    "data": "20gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "20"
+  },
+  {
+    "id": 2,
+    "subscriptionId": "royalmobile-40gb-1year",
+    "durationId": "1year",
+    "data": "40gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "30"
+  },
+  {
+    "id": 3,
+    "subscriptionId": "royalmobile-60gb-1year",
+    "durationId": "1year",
+    "data": "60gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "40"
+  },
+  {
+    "id": 4,
+    "subscriptionId": "royalmobile-80gb-1year",
+    "durationId": "1year",
+    "data": "80gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "50"
+  },
+  {
+    "id": 5,
+    "subscriptionId": "royalmobile-20gb-2year",
+    "durationId": "2year",
+    "data": "20gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "18"
+  },
+  {
+    "id": 6,
+    "subscriptionId": "royalmobile-40gb-2year",
+    "durationId": "2year",
+    "data": "40gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "28"
+  },
+  {
+    "id": 7,
+    "subscriptionId": "royalmobile-60gb-2year",
+    "durationId": "2year",
+    "data": "60gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "38"
+  },
+  {
+    "id": 8,
+    "subscriptionId": "royalmobile-80gb-2year",
+    "durationId": "2year",
+    "data": "80gb",
+    "benefits_long": [
+      "unlimited calls",
+      "unlimited texts",
+      "unlimited roaming"
+    ],
+    "benefits_short": "unlimited\n calls, texts, roaming",
+    "regular_price": "48"
+  }
+]
