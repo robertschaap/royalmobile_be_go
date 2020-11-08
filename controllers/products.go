@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
@@ -55,6 +56,30 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{
 		Status:  "success",
 		Data:    getProductsStubs(),
+		Message: "",
+	}
+
+	res.JSON(w)
+}
+
+// GetProduct returns a single product
+func GetProduct(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["id"]
+
+	var product Product
+
+	fmt.Print(product)
+
+	for _, v := range getProductsStubs() {
+		if v.ModelID == id {
+			product = v
+			break
+		}
+	}
+
+	res := server.APIResponse{
+		Status:  "success",
+		Data:    product,
 		Message: "",
 	}
 

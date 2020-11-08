@@ -10,6 +10,7 @@ func CreateRouter() *mux.Router {
 	r := mux.NewRouter()
 
 	r.HandleFunc("/api/", controllers.GetIndex)
+	r.HandleFunc("/api/product/{id}", controllers.GetProduct)
 	r.HandleFunc("/api/products", controllers.GetProducts)
 	r.HandleFunc("/api/subscriptions", controllers.GetSubscriptions)
 
