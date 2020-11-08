@@ -10,8 +10,8 @@ import (
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-// Variant struct denotes a variation of the device with different color and/or capacity
-type Variant struct {
+// ProductVariant struct denotes a variation of the device with different color and/or capacity
+type ProductVariant struct {
 	ID              int32  `json:"id"`
 	VariantID       string `json:"variantId"`
 	Color           string `json:"color"`
@@ -26,11 +26,11 @@ type Variant struct {
 
 // Product struct denotes the base information of the device
 type Product struct {
-	ID           int32     `json:"id"`
-	Manufacturer string    `json:"manufacturer"`
-	Model        string    `json:"model"`
-	ModelID      string    `json:"modelId"`
-	Variants     []Variant `json:"variants"`
+	ID           int32            `json:"id"`
+	Manufacturer string           `json:"manufacturer"`
+	Model        string           `json:"model"`
+	ModelID      string           `json:"modelId"`
+	Variants     []ProductVariant `json:"variants"`
 }
 
 func getProductsStubs() []Product {
