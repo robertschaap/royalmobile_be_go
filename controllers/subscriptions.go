@@ -40,11 +40,7 @@ func getSubscriptionsStub() []Subscription {
 
 // GetSubscriptions returns a list of all available subscriptions
 func GetSubscriptions(w http.ResponseWriter, r *http.Request) {
-	res := server.APIResponse{
-		Status:  "success",
-		Data:    getSubscriptionsStub(),
-		Message: "",
-	}
-
+	res := server.APIResponse{}
+	res.Success(getSubscriptionsStub())
 	res.JSON(w)
 }
