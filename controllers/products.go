@@ -14,6 +14,7 @@ type Variant struct {
 	ID              int32  `json:"id"`
 	VariantID       string `json:"variantId"`
 	Color           string `json:"color"`
+	ColorHex        string `json:"colorHex"`
 	Capacity        string `json:"capacity"`
 	IsInStock       bool   `json:"is_in_stock"`
 	IsPreorder      bool   `json:"is_preorder"`
