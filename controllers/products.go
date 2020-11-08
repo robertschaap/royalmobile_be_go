@@ -53,12 +53,8 @@ func getProductsStubs() []Product {
 
 // GetProducts returns a list of all available phones and basic specifications.
 func GetProducts(w http.ResponseWriter, r *http.Request) {
-	res := server.APIResponse{
-		Status:  "success",
-		Data:    getProductsStubs(),
-		Message: "",
-	}
-
+	res := server.APIResponse{}
+	res.Success(getProductsStubs())
 	res.JSON(w)
 }
 
@@ -68,8 +64,6 @@ func GetProduct(w http.ResponseWriter, r *http.Request) {
 
 	var product Product
 
-	fmt.Print(product)
-
 	for _, v := range getProductsStubs() {
 		if v.ModelID == id {
 			product = v
@@ -77,11 +71,7 @@ func GetProduct(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	res := server.APIResponse{
-		Status:  "success",
-		Data:    product,
-		Message: "",
-	}
-
+	res := server.APIResponse{}
+	res.Success(product)
 	res.JSON(w)
 }
