@@ -9,15 +9,16 @@ import (
 func CreateRouter() *mux.Router {
 	r := mux.NewRouter()
 
-	// TOOD: mux has a way to simplify the /api prefix, do it
-	r.HandleFunc("/api/", controllers.GetIndex)
-	r.HandleFunc("/api/cart/{cartId}", controllers.GetCart)
-	r.HandleFunc("/api/cart/{cartId}/item", controllers.AddCartItem)
-	r.HandleFunc("/api/cart/{cartId}/item/{itemId}", controllers.DeleteCartItem)
-	r.HandleFunc("/api/cart/order", controllers.PostOrder)
-	r.HandleFunc("/api/product/{id}", controllers.GetProduct)
-	r.HandleFunc("/api/products", controllers.GetProducts)
-	r.HandleFunc("/api/subscriptions", controllers.GetSubscriptions)
+	api := r.PathPrefix("/api").Subrouter()
+
+	api.HandleFunc("/", controllers.GetIndex)
+	api.HandleFunc("/cart/{cartId}", controllers.GetCart)
+	api.HandleFunc("/cart/{cartId}/item", controllers.AddCartItem)
+	api.HandleFunc("/cart/{cartId}/item/{itemId}", controllers.DeleteCartItem)
+	api.HandleFunc("/cart/order", controllers.PostOrder)
+	api.HandleFunc("/product/{id}", controllers.GetProduct)
+	api.HandleFunc("/products", controllers.GetProducts)
+	api.HandleFunc("/subscriptions", controllers.GetSubscriptions)
 
 	return r
 }
