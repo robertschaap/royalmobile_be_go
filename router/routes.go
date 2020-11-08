@@ -20,5 +20,7 @@ func CreateRouter() *mux.Router {
 	api.HandleFunc("/products", controllers.GetProducts)
 	api.HandleFunc("/subscriptions", controllers.GetSubscriptions)
 
+	r.PathPrefix("/").HandlerFunc(controllers.GetError)
+
 	return r
 }
