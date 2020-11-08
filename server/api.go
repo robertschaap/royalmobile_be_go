@@ -5,18 +5,45 @@ import (
 	"net/http"
 )
 
-// APIResponse defines basic response structure.
-// Status is either success or error.
-// Data is the response data.
-// Message is an optional error message.
-type APIResponse struct {
+// apiResponse is the actual base response we return to a client. This is private to prevent
+// consumers from modifying any of the fields on the APIResponse struct without explicitly
+// callig the provided methods.
+type apiResponseJSON struct {
 	Status  string      `json:"status"`
 	Data    interface{} `json:"data"`
-	Message string      `json:"message"`
+	Message interface{} `json:"message"`
 }
 
-// JSON converts the APIReponse struct to JSON and sends it as response.
+// APIResponse defines basic response structure that is called with either Success or Error
+// and sent to the client with the JSON method.
+type APIResponse struct {
+	status  string
+	data    interface{}
+	message interface{}
+}
+
+// Success response returns a successful response with the passed data
+func (r *APIResponse) Success(data interface{}) {
+	r.status = "success"
+	r.data = data
+	r.message = nil
+}
+
+// Error response returns an error response with the passed error message
+func (r *APIResponse) Error(message string) {
+	r.status = "error"
+	r.message = message
+	r.data = nil
+}
+
+// JSON converts the APIReponse struct to JSON and calls http.ResponseWriter with it
 func (r *APIResponse) JSON(w http.ResponseWriter) {
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(r)
+
+	res := apiResponseJSON{}
+	res.Status = r.status
+	res.Data = r.data
+	res.Message = r.message
+
+	json.NewEncoder(w).Encode(res)
 }
