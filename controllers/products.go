@@ -4,14 +4,14 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	m "github.com/robertschaap/royalmobile_go_be/model"
+	"github.com/robertschaap/royalmobile_go_be/models"
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
 // GetProducts returns a list of all available phones and basic specifications.
 func GetProducts(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success(m.GetProducts())
+	res.Success(models.GetProducts())
 	res.JSON(w)
 }
 
@@ -19,9 +19,9 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 func GetProduct(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 
-	var product m.Product
+	var product models.Product
 
-	for _, v := range m.GetProducts() {
+	for _, v := range models.GetProducts() {
 		if v.ModelID == id {
 			product = v
 			break
