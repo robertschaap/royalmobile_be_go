@@ -3,6 +3,7 @@ package controllers
 import (
 	"net/http"
 
+	m "github.com/robertschaap/royalmobile_go_be/models"
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
@@ -14,7 +15,7 @@ type cart struct {
 
 type cartItem struct {
 	product      Product
-	subscription Subscription
+	subscription m.Subscription
 	totals       cartTotals
 }
 
