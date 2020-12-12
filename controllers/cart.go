@@ -3,26 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/robertschaap/royalmobile_go_be/models"
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
-
-type cart struct {
-	ID     string     `json:"id"`
-	Items  []cartItem `json:"items"`
-	Totals cartTotals `json:"totals"`
-}
-
-type cartItem struct {
-	product      models.Product
-	subscription models.Subscription
-	totals       cartTotals
-}
-
-type cartTotals struct {
-	monthlyPrice string
-	oneTimePrice string
-}
 
 // GetCart returns a shopping cart with products
 func GetCart(w http.ResponseWriter, r *http.Request) {
