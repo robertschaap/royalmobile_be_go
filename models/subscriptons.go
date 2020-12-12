@@ -22,16 +22,9 @@ func GetSubscriptions() []Subscription {
 
 	data, err := ioutil.ReadFile("./stubs/subscriptions.json")
 
-	if err != nil {
-		return subscriptions
-	}
-
-	err = json.Unmarshal(data, &subscriptions)
-
-	if err != nil {
-		return subscriptions
+	if err == nil {
+		json.Unmarshal(data, &subscriptions)
 	}
 
 	return subscriptions
-
 }
