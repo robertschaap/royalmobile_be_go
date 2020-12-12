@@ -2,7 +2,6 @@ package models
 
 import (
 	"encoding/json"
-	"fmt"
 	"io/ioutil"
 )
 
@@ -31,18 +30,12 @@ type Product struct {
 
 // GetProducts reads products from disk or returns an empty slice
 func GetProducts() []Product {
+	products := []Product{}
+
 	data, err := ioutil.ReadFile("./stubs/products.json")
 
-	if err != nil {
-		fmt.Print(err)
-	}
-
-	var products []Product
-
-	err = json.Unmarshal(data, &products)
-
-	if err != nil {
-		fmt.Println("error:", err)
+	if err == nil {
+		json.Unmarshal(data, &products)
 	}
 
 	return products
