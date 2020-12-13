@@ -12,9 +12,9 @@ func CreateRouter() *mux.Router {
 	api := r.PathPrefix("/api").Subrouter()
 
 	api.HandleFunc("/", controllers.GetIndex)
-	api.HandleFunc("/cart/{cartId}", controllers.GetCart)
-	api.HandleFunc("/cart/{cartId}/item", controllers.AddCartItem)
-	api.HandleFunc("/cart/{cartId}/item/{itemId}", controllers.DeleteCartItem)
+	api.HandleFunc("/cart/{cartID}", controllers.GetCart)
+	api.HandleFunc("/cart/{cartID}/item", controllers.AddCartItem)
+	api.HandleFunc("/cart/{cartID}/item/{itemID}", controllers.DeleteCartItem)
 	api.HandleFunc("/cart/order", controllers.PostOrder)
 	api.HandleFunc("/product/{modelID}", controllers.GetProduct)
 	api.HandleFunc("/products", controllers.GetProducts)
