@@ -7,7 +7,7 @@ import (
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-// GetSubscriptions returns a list of all available subscriptions
+// GetSubscriptions returns a list of Subscriptions or an empty list
 func GetSubscriptions(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
 	res.Success(models.GetSubscriptions())
