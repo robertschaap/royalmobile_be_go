@@ -8,16 +8,16 @@ import (
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-// GetProducts returns a list of all available phones and basic specifications.
+// GetProducts returns a list of Product or an empty list
 func GetProducts(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
 	res.Success(models.GetProducts())
 	res.JSON(w)
 }
 
-// GetProduct returns a single product
+// GetProduct takes a modelID and returns a Product or error
 func GetProduct(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["id"]
+	id := mux.Vars(r)["modelID"]
 
 	var product models.Product
 

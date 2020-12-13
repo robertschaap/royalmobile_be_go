@@ -16,7 +16,7 @@ func CreateRouter() *mux.Router {
 	api.HandleFunc("/cart/{cartId}/item", controllers.AddCartItem)
 	api.HandleFunc("/cart/{cartId}/item/{itemId}", controllers.DeleteCartItem)
 	api.HandleFunc("/cart/order", controllers.PostOrder)
-	api.HandleFunc("/product/{id}", controllers.GetProduct)
+	api.HandleFunc("/product/{modelID}", controllers.GetProduct)
 	api.HandleFunc("/products", controllers.GetProducts)
 	api.HandleFunc("/subscriptions", controllers.GetSubscriptions)
 
