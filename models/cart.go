@@ -14,6 +14,15 @@ type cartItem struct {
 }
 
 type cartTotals struct {
-	monthlyPrice string
-	oneTimePrice string
+	MonthlyPrice string `json:"monthly_price"`
+	OneTimePrice string `json:"one_time_price"`
+}
+
+// GetCartByID gets a cart by ID
+func GetCartByID(cartID string) Cart {
+	return Cart{
+		ID:     "new-cart",
+		Items:  make([]cartItem, 0),
+		Totals: cartTotals{},
+	}
 }
