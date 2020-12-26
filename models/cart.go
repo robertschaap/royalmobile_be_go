@@ -18,11 +18,15 @@ type cartTotals struct {
 	OneTimePrice string `json:"one_time_price"`
 }
 
-// GetCartByID gets a cart by ID
-func GetCartByID(cartID string) Cart {
-	return Cart{
+var carts = []Cart{
+	{
 		ID:     "new-cart",
 		Items:  make([]cartItem, 0),
 		Totals: cartTotals{},
-	}
+	},
+}
+
+// GetCartByID gets a cart by ID
+func GetCartByID(cartID string) Cart {
+	return carts[0]
 }
