@@ -19,16 +19,7 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 func GetProduct(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["modelID"]
 
-	var product models.Product
-
-	for _, v := range models.GetProduct() {
-		if v.ModelID == id {
-			product = v
-			break
-		}
-	}
-
 	res := server.APIResponse{}
-	res.Success(product)
+	res.Success(models.GetProduct(id))
 	res.JSON(w)
 }

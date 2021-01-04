@@ -41,8 +41,8 @@ func GetProducts() []Product {
 	return products
 }
 
-// GetProducts reads products from disk or returns an empty slice
-func GetProduct() []Product {
+// GetProduct reads products from disk or returns an empty slice
+func GetProduct(modelID string) Product {
 	products := []Product{}
 
 	data, err := ioutil.ReadFile("./stubs/products.json")
@@ -51,5 +51,14 @@ func GetProduct() []Product {
 		json.Unmarshal(data, &products)
 	}
 
-	return products
+	var product Product
+
+	for _, v := range products {
+		if v.ModelID == modelID {
+			product = v
+			break
+		}
+	}
+
+	return product
 }
