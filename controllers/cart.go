@@ -3,14 +3,17 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/robertschaap/royalmobile_go_be/models"
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
 // GetCart takes a UUIDv4 string "cartID" and returns a Cart or error
 func GetCart(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["cartID"]
+
 	res := server.APIResponse{}
-	res.Success(models.GetCartByID("new-cart"))
+	res.Success(models.GetCartByID(id))
 	res.JSON(w)
 }
 
