@@ -21,7 +21,7 @@ func GetProduct(w http.ResponseWriter, r *http.Request) {
 
 	var product models.Product
 
-	for _, v := range models.GetProducts() {
+	for _, v := range models.GetProduct() {
 		if v.ModelID == id {
 			product = v
 			break

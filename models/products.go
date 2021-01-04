@@ -40,3 +40,16 @@ func GetProducts() []Product {
 
 	return products
 }
+
+// GetProducts reads products from disk or returns an empty slice
+func GetProduct() []Product {
+	products := []Product{}
+
+	data, err := ioutil.ReadFile("./stubs/products.json")
+
+	if err == nil {
+		json.Unmarshal(data, &products)
+	}
+
+	return products
+}
