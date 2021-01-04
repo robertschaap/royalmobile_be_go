@@ -5,12 +5,13 @@ Go | Gorilla Mux
 
 ### Scope
 ##### What it was designed to do
-+ Be a back-end for the front-end
-+ Be a good test of Golang, as such this focuses on implementing persistence in a way that's fun to test the language with, but you should probably not replicate this
++ Be a simple backend to the webstore
++ Have a few routes
++ Be a test of some manual data manipulation (hence no DB for now)
 
 ##### What it wasn't designed to do
-- Connect to a database
-- Any authentication
+- Manage session or users
+- Be a full commercial back-end (i.e. some things like the manual DB are impractical though interesting to implement and past accepting an order there is no functionality)
 
 ### Installation Notes
 Please feel free to download or clone the repository. This is just the back-end, front-end repositories are named `royalmobile_fe_*`. By default the back-end will run on port `4000` which the front-end repositories expect.
