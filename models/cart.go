@@ -1,5 +1,7 @@
 package models
 
+import "errors"
+
 // Cart struct is a struct
 type Cart struct {
 	ID     string     `json:"id"`
@@ -28,5 +30,12 @@ var carts = []Cart{
 
 // GetCartByID gets a cart by ID
 func GetCartByID(cartID string) (Cart, error) {
-	return carts[0], nil
+	for _, v := range carts {
+		if v.ID == cartID {
+			return v, nil
+		}
+	}
+
+	// TODO: figure out if this is idiomatic Go
+	return Cart{}, errors.New("Cart could not be found")
 }
