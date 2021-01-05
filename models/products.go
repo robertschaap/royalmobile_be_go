@@ -2,6 +2,7 @@ package models
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 )
 
@@ -42,7 +43,7 @@ func GetProducts() []Product {
 }
 
 // GetProduct reads products from disk or returns an empty slice
-func GetProduct(modelID string) Product {
+func GetProduct(modelID string) (Product, error) {
 	products := []Product{}
 
 	data, err := ioutil.ReadFile("./stubs/products.json")
@@ -56,9 +57,9 @@ func GetProduct(modelID string) Product {
 	for _, v := range products {
 		if v.ModelID == modelID {
 			product = v
-			break
+			return product, nil
 		}
 	}
 
-	return product
+	return product, errors.New("Could not get product")
 }

@@ -19,7 +19,14 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 func GetProduct(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["modelID"]
 
+	product, err := models.GetProduct((id))
 	res := server.APIResponse{}
-	res.Success(models.GetProduct(id))
+
+	if err == nil {
+		res.Success(product)
+	} else {
+		res.Error("Could not get product")
+	}
+
 	res.JSON(w)
 }
