@@ -27,6 +27,6 @@ var carts = []Cart{
 }
 
 // GetCartByID gets a cart by ID
-func GetCartByID(cartID string) Cart {
-	return carts[0]
+func GetCartByID(cartID string) (Cart, error) {
+	return carts[0], nil
 }

@@ -12,8 +12,16 @@ import (
 func GetCart(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["cartID"]
 
+	cart, err := models.GetCartByID(id)
+
 	res := server.APIResponse{}
-	res.Success(models.GetCartByID(id))
+
+	if err == nil {
+		res.Success(cart)
+	} else {
+		res.Error("Cart could not be found")
+	}
+
 	res.JSON(w)
 }
 
