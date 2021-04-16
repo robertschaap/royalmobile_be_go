@@ -2,6 +2,7 @@ package models
 
 import (
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 )
 
@@ -27,4 +28,16 @@ func GetSubscriptions() []Subscription {
 	}
 
 	return subscriptions
+}
+
+func getSubscriptionByID(subscriptionID string) (Subscription, error) {
+	subscriptions := GetSubscriptions()
+
+	for _, v := range subscriptions {
+		if v.SubscriptionID == subscriptionID {
+			return v, nil
+		}
+	}
+
+	return Subscription{}, errors.New("Could not get subscription")
 }
