@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
+	"strings"
 )
 
 // ProductVariant struct is a struct
@@ -62,4 +63,32 @@ func GetProduct(modelID string) (Product, error) {
 	}
 
 	return product, errors.New("Could not get product")
+}
+
+func getProductByVariantID(variantID string) (Product, error) {
+	split := strings.Split(variantID, "-")
+	modelID := strings.Join(split[:2], "-")
+
+	product, err := GetProduct(modelID)
+
+	if err != nil {
+		return product, errors.New("Could not get product variant")
+	}
+
+	var variants []ProductVariant
+
+	for _, v := range product.Variants {
+		if v.VariantID == variantID {
+			variants = append(variants, v)
+			break
+		}
+	}
+
+	if len(variants) == 0 {
+		return product, errors.New("Could not get product variant")
+	}
+
+	product.Variants = variants
+
+	return product, nil
 }
