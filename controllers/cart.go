@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -25,10 +26,29 @@ func GetCart(w http.ResponseWriter, r *http.Request) {
 	res.JSON(w)
 }
 
+type addCartItemBody struct {
+	VariantID      string `json:"variantId"`
+	SubscriptionID string `json:"subscriptionId"`
+}
+
 // AddCartItem takes a UUIDv4 string "cartID" or the keyword "new" and returns a Cart or error
 func AddCartItem(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["cartID"]
+
+	// TODO also parse x-www-form-urlencoded instead of just json
+	var body addCartItemBody
+	err := json.NewDecoder(r.Body).Decode(&body)
+
+	cart, err := models.AddCartItem(id, body.VariantID, body.SubscriptionID)
+
 	res := server.APIResponse{}
-	res.Success(nil)
+
+	if err == nil {
+		res.Success(cart)
+	} else {
+		res.Error("Could not add cart item")
+	}
+
 	res.JSON(w)
 }
 
