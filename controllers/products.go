@@ -19,7 +19,7 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 func GetProduct(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["modelID"]
 
-	product, err := models.GetProduct((id))
+	product, err := models.GetProduct(id)
 	res := server.APIResponse{}
 
 	if err == nil {
