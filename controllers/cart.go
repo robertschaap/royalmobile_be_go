@@ -2,7 +2,10 @@ package controllers
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
+	"reflect"
+	"strings"
 
 	"github.com/gorilla/mux"
 	"github.com/robertschaap/royalmobile_go_be/models"
@@ -31,17 +34,43 @@ type addCartItemBody struct {
 	SubscriptionID string `json:"subscriptionId"`
 }
 
+func decodeRequestBody(r *http.Request, target interface{}) error {
+	contentType := r.Header.Get("Content-Type")
+
+	if strings.Contains(contentType, "application/json") {
+		return json.NewDecoder(r.Body).Decode(target)
+	}
+
+	if strings.Contains(contentType, "application/x-www-form-urlencoded") {
+		rt := reflect.TypeOf(target).Elem()
+		rv := reflect.ValueOf(target).Elem()
+
+		for i := 0; i < rt.NumField(); i++ {
+			field := rt.Field(i)
+			f := rv.FieldByName(field.Name)
+			ptr := f.Addr().Interface().(*string)
+			*ptr = r.FormValue(field.Tag.Get("json"))
+		}
+	}
+
+	return errors.New("Could not decode request body")
+}
+
 // AddCartItem takes a UUIDv4 string "cartID" or the keyword "new" and returns a Cart or error
 func AddCartItem(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["cartID"]
+	res := server.APIResponse{}
 
-	// TODO also parse x-www-form-urlencoded instead of just json
 	var body addCartItemBody
-	err := json.NewDecoder(r.Body).Decode(&body)
+	err := decodeRequestBody(r, &body)
+
+	if err != nil {
+		res.Error("Could not add cart item")
+		res.JSON(w)
+		return
+	}
 
 	cart, err := models.AddCartItem(id, body.VariantID, body.SubscriptionID)
-
-	res := server.APIResponse{}
 
 	if err == nil {
 		res.Success(cart)
