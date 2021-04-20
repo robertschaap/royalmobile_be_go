@@ -96,6 +96,48 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 
 	var cartTotals cartTotals
 
+	// Wrong values because of string concatenation
+	for _, item := range cart.Items {
+		cartTotals.MonthlyPrice += item.Totals.MonthlyPrice
+		cartTotals.OneTimePrice += item.Totals.OneTimePrice
+	}
+
+	cart.Totals = cartTotals
+
+	for i, c := range carts {
+		if c.ID == cart.ID {
+			carts[i] = cart
+			break
+		}
+	}
+
+	return cart, nil
+}
+
+func DeleteCartItem(cartID string, itemID string) (Cart, error) {
+	cart, err := GetCartByID(cartID)
+
+	if err != nil {
+		return Cart{}, errors.New("Could not delete cart item")
+	}
+
+	index := -1
+	for i, item := range cart.Items {
+		if item.ID == itemID {
+			index = i
+			break
+		}
+	}
+
+	if index == -1 {
+		return Cart{}, errors.New("Could not delete cart item")
+	}
+
+	cart.Items = append(cart.Items[:index], cart.Items[index+1:]...)
+
+	var cartTotals cartTotals
+
+	// Wrong values because of string concatenation
 	for _, item := range cart.Items {
 		cartTotals.MonthlyPrice += item.Totals.MonthlyPrice
 		cartTotals.OneTimePrice += item.Totals.OneTimePrice
