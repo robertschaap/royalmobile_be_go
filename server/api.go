@@ -23,17 +23,21 @@ type APIResponse struct {
 }
 
 // Success response returns a successful response with the passed data
-func (r *APIResponse) Success(data interface{}) {
+func (r *APIResponse) Success(data interface{}) *APIResponse {
 	r.status = "success"
 	r.data = data
 	r.message = nil
+
+	return r
 }
 
 // Error response returns an error response with the passed error message
-func (r *APIResponse) Error(message string) {
+func (r *APIResponse) Error(message string) *APIResponse {
 	r.status = "error"
 	r.message = message
 	r.data = nil
+
+	return r
 }
 
 // JSON converts the APIReponse struct to JSON and calls http.ResponseWriter with it
