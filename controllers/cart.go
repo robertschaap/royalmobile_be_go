@@ -88,8 +88,17 @@ func AddCartItem(w http.ResponseWriter, r *http.Request) {
 
 // DeleteCartItem takes a UUIDv4 string "cartID" and "itemID" and returns a Cart without the item to delete or error
 func DeleteCartItem(w http.ResponseWriter, r *http.Request) {
+	cartID := mux.Vars(r)["cartID"]
+	itemID := mux.Vars(r)["itemID"]
 	res := server.APIResponse{}
-	res.Success(nil).JSON(w)
+
+	cart, err := models.DeleteCartItem(cartID, itemID)
+
+	if err != nil {
+		res.Error("Could not delete cart item").JSON(w)
+	}
+
+	res.Success(cart).JSON(w)
 }
 
 // PostOrder takes a UUIDv4 string "cartID" and returns a Cart if succesful or an error
