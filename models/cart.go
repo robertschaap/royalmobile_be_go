@@ -2,6 +2,7 @@ package models
 
 import (
 	"errors"
+	"strconv"
 
 	"github.com/google/uuid"
 )
@@ -43,6 +44,26 @@ func createCart() Cart {
 	carts = append(carts, cart)
 
 	return cart
+}
+
+func updateCartTotals(cartItems []cartItem) cartTotals {
+	monthlyPrice := 0
+	oneTimePrice := 0
+
+	for _, item := range cartItems {
+		if p, err := strconv.Atoi(item.Totals.MonthlyPrice); err == nil {
+			monthlyPrice += p
+		}
+
+		if p, err := strconv.Atoi(item.Totals.OneTimePrice); err == nil {
+			oneTimePrice += p
+		}
+	}
+
+	return cartTotals{
+		strconv.Itoa(monthlyPrice),
+		strconv.Itoa(oneTimePrice),
+	}
 }
 
 // GetCartByID gets a cart by ID
@@ -93,16 +114,7 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 	}
 
 	cart.Items = append(cart.Items, item)
-
-	var cartTotals cartTotals
-
-	// Wrong values because of string concatenation
-	for _, item := range cart.Items {
-		cartTotals.MonthlyPrice += item.Totals.MonthlyPrice
-		cartTotals.OneTimePrice += item.Totals.OneTimePrice
-	}
-
-	cart.Totals = cartTotals
+	cart.Totals = updateCartTotals(cart.Items)
 
 	for i, c := range carts {
 		if c.ID == cart.ID {
@@ -134,16 +146,7 @@ func DeleteCartItem(cartID string, itemID string) (Cart, error) {
 	}
 
 	cart.Items = append(cart.Items[:index], cart.Items[index+1:]...)
-
-	var cartTotals cartTotals
-
-	// Wrong values because of string concatenation
-	for _, item := range cart.Items {
-		cartTotals.MonthlyPrice += item.Totals.MonthlyPrice
-		cartTotals.OneTimePrice += item.Totals.OneTimePrice
-	}
-
-	cart.Totals = cartTotals
+	cart.Totals = updateCartTotals(cart.Items)
 
 	for i, c := range carts {
 		if c.ID == cart.ID {
