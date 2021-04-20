@@ -21,12 +21,10 @@ func GetCart(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
 
 	if err == nil {
-		res.Success(cart)
+		res.Success(cart).JSON(w)
 	} else {
-		res.Error("Cart could not be found")
+		res.Error("Cart could not be found").JSON(w)
 	}
-
-	res.JSON(w)
 }
 
 type addCartItemBody struct {
@@ -65,32 +63,27 @@ func AddCartItem(w http.ResponseWriter, r *http.Request) {
 	err := decodeRequestBody(r, &body)
 
 	if err != nil {
-		res.Error("Could not add cart item")
-		res.JSON(w)
+		res.Error("Could not add cart item").JSON(w)
 		return
 	}
 
 	cart, err := models.AddCartItem(id, body.VariantID, body.SubscriptionID)
 
 	if err == nil {
-		res.Success(cart)
+		res.Success(cart).JSON(w)
 	} else {
-		res.Error("Could not add cart item")
+		res.Error("Could not add cart item").JSON(w)
 	}
-
-	res.JSON(w)
 }
 
 // DeleteCartItem takes a UUIDv4 string "cartID" and "itemID" and returns a Cart without the item to delete or error
 func DeleteCartItem(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success(nil)
-	res.JSON(w)
+	res.Success(nil).JSON(w)
 }
 
 // PostOrder takes a UUIDv4 string "cartID" and returns a Cart if succesful or an error
 func PostOrder(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success(nil)
-	res.JSON(w)
+	res.Success(nil).JSON(w)
 }
