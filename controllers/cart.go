@@ -43,12 +43,21 @@ func decodeRequestBody(r *http.Request, target interface{}) error {
 		rt := reflect.TypeOf(target).Elem()
 		rv := reflect.ValueOf(target).Elem()
 
+		if rv.Kind().String() != "struct" {
+			return errors.New("Could not decode request body")
+		}
+
+		// Loop through fields in the target struct and read values from the request
+		// into it based on the field tag from the target struct
 		for i := 0; i < rt.NumField(); i++ {
 			field := rt.Field(i)
 			f := rv.FieldByName(field.Name)
 			ptr := f.Addr().Interface().(*string)
+
 			*ptr = r.FormValue(field.Tag.Get("json"))
 		}
+
+		return nil
 	}
 
 	return errors.New("Could not decode request body")
@@ -69,11 +78,12 @@ func AddCartItem(w http.ResponseWriter, r *http.Request) {
 
 	cart, err := models.AddCartItem(id, body.VariantID, body.SubscriptionID)
 
-	if err == nil {
-		res.Success(cart).JSON(w)
-	} else {
+	if err != nil {
 		res.Error("Could not add cart item").JSON(w)
+		return
 	}
+
+	res.Success(cart).JSON(w)
 }
 
 // DeleteCartItem takes a UUIDv4 string "cartID" and "itemID" and returns a Cart without the item to delete or error
