@@ -91,27 +91,23 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 		return Cart{}, errors.New("Could not add cart item")
 	}
 
-	product, err := getProductByVariantID(variantID)
+	var item cartItem
+	item.ID = uuid.NewString()
 
-	if err != nil {
+	if product, err := getProductByVariantID(variantID); err == nil {
+		item.Product = product
+	} else {
 		return Cart{}, errors.New("Could not add cart item")
 	}
 
-	subscription, err := getSubscriptionByID(subscriptionID)
-
-	if err != nil {
+	if subscription, err := getSubscriptionByID(subscriptionID); err == nil {
+		item.Subscription = subscription
+	} else {
 		return Cart{}, errors.New("Could not add cart item")
 	}
 
-	item := cartItem{
-		uuid.NewString(),
-		product,
-		subscription,
-		cartTotals{
-			subscription.RegularPrice,
-			product.Variants[0].RegularPrice,
-		},
-	}
+	item.Totals.MonthlyPrice = item.Subscription.RegularPrice
+	item.Totals.OneTimePrice = item.Product.Variants[0].RegularPrice
 
 	cart.Items = append(cart.Items, item)
 	cart.Totals = updateCartTotals(cart.Items)
