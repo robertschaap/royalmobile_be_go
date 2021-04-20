@@ -10,6 +10,5 @@ import (
 // GetSubscriptions returns a list of Subscriptions or an empty list
 func GetSubscriptions(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success(models.GetSubscriptions())
-	res.JSON(w)
+	res.Success(models.GetSubscriptions()).JSON(w)
 }
