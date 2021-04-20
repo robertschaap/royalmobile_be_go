@@ -11,8 +11,7 @@ import (
 // GetProducts returns a list of Product or an empty list
 func GetProducts(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success(models.GetProducts())
-	res.JSON(w)
+	res.Success(models.GetProducts()).JSON(w)
 }
 
 // GetProduct takes a modelID and returns a Product or error
@@ -23,10 +22,8 @@ func GetProduct(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
 
 	if err == nil {
-		res.Success(product)
+		res.Success(product).JSON(w)
 	} else {
-		res.Error("Could not get product")
+		res.Error("Could not get product").JSON(w)
 	}
-
-	res.JSON(w)
 }
