@@ -13,14 +13,6 @@ type Cart struct {
 	Totals cartTotals `json:"totals"`
 }
 
-func NewCart() Cart {
-	return Cart{
-		uuid.NewString(),
-		make([]cartItem, 0),
-		cartTotals{"0", "0"},
-	}
-}
-
 type cartItem struct {
 	ID           string       `json:"id"`
 	Product      Product      `json:"product"`
@@ -42,7 +34,12 @@ var carts = []Cart{
 }
 
 func createCart() Cart {
-	cart := NewCart()
+	cart := Cart{
+		uuid.NewString(),
+		make([]cartItem, 0),
+		cartTotals{"0", "0"},
+	}
+
 	carts = append(carts, cart)
 
 	return cart
@@ -56,7 +53,6 @@ func GetCartByID(cartID string) (Cart, error) {
 		}
 	}
 
-	// TODO: figure out if this is idiomatic Go
 	return Cart{}, errors.New("Cart could not be found")
 }
 
@@ -68,7 +64,6 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 		usedCartID = createCart().ID
 	}
 
-	// TODO get or create new cart
 	cart, err := GetCartByID(usedCartID)
 
 	if err != nil {
