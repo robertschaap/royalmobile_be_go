@@ -9,7 +9,5 @@ import (
 // GetIndex returns basic information about the API when called
 func GetIndex(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success("Hello World!")
-
-	res.JSON(w)
+	res.Success("Hello World!").JSON(w)
 }
