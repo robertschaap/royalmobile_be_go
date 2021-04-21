@@ -12,15 +12,9 @@ import (
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-type addCartItemBody struct {
-	VariantID      string `json:"variantId"`
-	SubscriptionID string `json:"subscriptionId"`
-}
-
-type postOrderBody struct {
-	CartID string `json:"cartId"`
-}
-
+// decodeRequestBody takes the http.Request and attemts to read the body of
+// the request into the target struct based on what Content-Type is set
+// in the header of the request. It returns an error if it fails
 func decodeRequestBody(r *http.Request, target interface{}) error {
 	contentType := r.Header.Get("Content-Type")
 
@@ -65,6 +59,11 @@ func GetCart(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+type addCartItemBody struct {
+	VariantID      string `json:"variantId"`
+	SubscriptionID string `json:"subscriptionId"`
+}
+
 // AddCartItem takes a UUIDv4 string "cartID" or the keyword "new" and returns a Cart or error
 func AddCartItem(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["cartID"]
@@ -97,7 +96,11 @@ func DeleteCartItem(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// PostOrder takes a UUIDv4 string "cartID" and returns a Cart if succesful or an error
+type postOrderBody struct {
+	CartID string `json:"cartId"`
+}
+
+// PostOrder takes a UUIDv4 string "cartID" and returns the cartID if succesful or an error
 func PostOrder(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
 

@@ -7,13 +7,14 @@ import (
 	"github.com/google/uuid"
 )
 
-// Cart struct is a struct
+// Cart contains the base information of a cart. The ID is a UUIDv4
 type Cart struct {
 	ID     string     `json:"id"`
 	Items  []cartItem `json:"items"`
 	Totals cartTotals `json:"totals"`
 }
 
+// cartItem contains the base information of a cartItem. The ID is a UUIDv4
 type cartItem struct {
 	ID           string       `json:"id"`
 	Product      Product      `json:"product"`
@@ -21,6 +22,7 @@ type cartItem struct {
 	Totals       cartTotals   `json:"totals"`
 }
 
+// cartTotals represent the total monthly or one time amounts for an entire cart or a single cart item.
 type cartTotals struct {
 	MonthlyPrice string `json:"monthly_price"`
 	OneTimePrice string `json:"onetime_price"`
@@ -77,7 +79,8 @@ func GetCartByID(cartID string) (Cart, error) {
 	return Cart{}, errors.New("Cart could not be found")
 }
 
-// AddCartItem adds a cart item
+// AddCartItem attempts to add a cart item to a cart based on a variantID and subscriptionID.
+// If neither are found or the cart cannot be updated it returns an error
 func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, error) {
 	usedCartID := cartID
 
@@ -122,7 +125,8 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 	return cart, nil
 }
 
-// DeleteCartItem deletes a cart item
+// DeleteCartItem attempts to find a Cart and delete a specific item from it.
+// If either cannot be performed it returns an error.
 func DeleteCartItem(cartID string, itemID string) (Cart, error) {
 	cart, err := GetCartByID(cartID)
 
@@ -155,7 +159,7 @@ func DeleteCartItem(cartID string, itemID string) (Cart, error) {
 	return cart, nil
 }
 
-// PostOrder posts an order
+// PostOrder is not fully implemented currently. It returns a Cart or an error
 func PostOrder(cartID string) (Cart, error) {
 	if cart, err := GetCartByID(cartID); err == nil {
 		return cart, nil
