@@ -12,24 +12,13 @@ import (
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-// GetCart takes a UUIDv4 string "cartID" and returns a Cart or error
-func GetCart(w http.ResponseWriter, r *http.Request) {
-	id := mux.Vars(r)["cartID"]
-
-	cart, err := models.GetCartByID(id)
-
-	res := server.APIResponse{}
-
-	if err == nil {
-		res.Success(cart).JSON(w)
-	} else {
-		res.Error("Cart could not be found").JSON(w)
-	}
-}
-
 type addCartItemBody struct {
 	VariantID      string `json:"variantId"`
 	SubscriptionID string `json:"subscriptionId"`
+}
+
+type postOrderBody struct {
+	CartID string `json:"cartId"`
 }
 
 func decodeRequestBody(r *http.Request, target interface{}) error {
@@ -63,27 +52,36 @@ func decodeRequestBody(r *http.Request, target interface{}) error {
 	return errors.New("Could not decode request body")
 }
 
+// GetCart takes a UUIDv4 string "cartID" and returns a Cart or error
+func GetCart(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)["cartID"]
+
+	res := server.APIResponse{}
+
+	if cart, err := models.GetCartByID(id); err == nil {
+		res.Success(cart).JSON(w)
+	} else {
+		res.Error("Cart could not be found").JSON(w)
+	}
+}
+
 // AddCartItem takes a UUIDv4 string "cartID" or the keyword "new" and returns a Cart or error
 func AddCartItem(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["cartID"]
 	res := server.APIResponse{}
 
 	var body addCartItemBody
-	err := decodeRequestBody(r, &body)
 
-	if err != nil {
+	if err := decodeRequestBody(r, &body); err != nil {
 		res.Error("Could not add cart item").JSON(w)
 		return
 	}
 
-	cart, err := models.AddCartItem(id, body.VariantID, body.SubscriptionID)
-
-	if err != nil {
+	if cart, err := models.AddCartItem(id, body.VariantID, body.SubscriptionID); err == nil {
+		res.Success(cart).JSON(w)
+	} else {
 		res.Error("Could not add cart item").JSON(w)
-		return
 	}
-
-	res.Success(cart).JSON(w)
 }
 
 // DeleteCartItem takes a UUIDv4 string "cartID" and "itemID" and returns a Cart without the item to delete or error
@@ -92,13 +90,11 @@ func DeleteCartItem(w http.ResponseWriter, r *http.Request) {
 	itemID := mux.Vars(r)["itemID"]
 	res := server.APIResponse{}
 
-	cart, err := models.DeleteCartItem(cartID, itemID)
-
-	if err != nil {
+	if cart, err := models.DeleteCartItem(cartID, itemID); err == nil {
+		res.Success(cart).JSON(w)
+	} else {
 		res.Error("Could not delete cart item").JSON(w)
 	}
-
-	res.Success(cart).JSON(w)
 }
 
 // PostOrder takes a UUIDv4 string "cartID" and returns a Cart if succesful or an error
