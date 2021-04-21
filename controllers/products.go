@@ -8,7 +8,7 @@ import (
 	"github.com/robertschaap/royalmobile_go_be/server"
 )
 
-// GetProducts returns a list of Product or an empty list
+// GetProducts returns a slice of Products or an empty slice
 func GetProducts(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
 	res.Success(models.GetProducts()).JSON(w)

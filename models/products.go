@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// ProductVariant struct is a struct
+// ProductVariant contains the base information of a variant
 type ProductVariant struct {
 	ID              int32  `json:"id"`
 	VariantID       string `json:"variantId"`
@@ -21,7 +21,7 @@ type ProductVariant struct {
 	HasDiscounts    bool   `json:"has_discounts"`
 }
 
-// Product struct denotes the base information of the device
+// Product contains the base information of a product
 type Product struct {
 	ID           int32            `json:"id"`
 	Manufacturer string           `json:"manufacturer"`
@@ -30,39 +30,32 @@ type Product struct {
 	Variants     []ProductVariant `json:"variants"`
 }
 
-// GetProducts reads products from disk or returns an empty slice
+// GetProducts reads products from disk into a slice or returns an empty slice
 func GetProducts() []Product {
 	products := []Product{}
 
-	data, err := ioutil.ReadFile("./stubs/products.json")
-
-	if err == nil {
+	if data, err := ioutil.ReadFile("./stubs/products.json"); err == nil {
 		json.Unmarshal(data, &products)
 	}
 
 	return products
 }
 
-// GetProduct reads products from disk or returns an empty slice
+// GetProduct reads products from disk, takes a modelID and returns a Product or error
 func GetProduct(modelID string) (Product, error) {
 	products := []Product{}
 
-	data, err := ioutil.ReadFile("./stubs/products.json")
-
-	if err == nil {
+	if data, err := ioutil.ReadFile("./stubs/products.json"); err == nil {
 		json.Unmarshal(data, &products)
 	}
 
-	var product Product
-
-	for _, v := range products {
-		if v.ModelID == modelID {
-			product = v
+	for _, product := range products {
+		if product.ModelID == modelID {
 			return product, nil
 		}
 	}
 
-	return product, errors.New("Could not get product")
+	return Product{}, errors.New("Could not get product")
 }
 
 func getProductByVariantID(variantID string) (Product, error) {
