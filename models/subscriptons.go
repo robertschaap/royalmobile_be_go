@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 )
 
-// Subscription struct denotes the base information of a subscription
+// Subscription contains the base information of a subscription
 type Subscription struct {
 	ID             int32    `json:"id"`
 	SubscriptionID string   `json:"subscriptionId"`
@@ -21,15 +21,14 @@ type Subscription struct {
 func GetSubscriptions() []Subscription {
 	subscriptions := []Subscription{}
 
-	data, err := ioutil.ReadFile("./stubs/subscriptions.json")
-
-	if err == nil {
+	if data, err := ioutil.ReadFile("./stubs/subscriptions.json"); err == nil {
 		json.Unmarshal(data, &subscriptions)
 	}
 
 	return subscriptions
 }
 
+// getSubscriptionByID reads products from disk, takes a modelID and returns a Subscription or error
 func getSubscriptionByID(subscriptionID string) (Subscription, error) {
 	subscriptions := GetSubscriptions()
 
