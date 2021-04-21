@@ -100,5 +100,16 @@ func DeleteCartItem(w http.ResponseWriter, r *http.Request) {
 // PostOrder takes a UUIDv4 string "cartID" and returns a Cart if succesful or an error
 func PostOrder(w http.ResponseWriter, r *http.Request) {
 	res := server.APIResponse{}
-	res.Success(nil).JSON(w)
+
+	var body postOrderBody
+	if err := decodeRequestBody(r, &body); err != nil {
+		res.Error("Could not post order").JSON(w)
+		return
+	}
+
+	if cart, err := models.PostOrder(body.CartID); err == nil {
+		res.Success(cart.ID).JSON(w)
+	} else {
+		res.Error("Could not post order").JSON(w)
+	}
 }

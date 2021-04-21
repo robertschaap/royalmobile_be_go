@@ -122,6 +122,7 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 	return cart, nil
 }
 
+// DeleteCartItem deletes a cart item
 func DeleteCartItem(cartID string, itemID string) (Cart, error) {
 	cart, err := GetCartByID(cartID)
 
@@ -152,4 +153,13 @@ func DeleteCartItem(cartID string, itemID string) (Cart, error) {
 	}
 
 	return cart, nil
+}
+
+// PostOrder posts an order
+func PostOrder(cartID string) (Cart, error) {
+	if cart, err := GetCartByID(cartID); err == nil {
+		return cart, nil
+	} else {
+		return Cart{}, errors.New("Could not post order")
+	}
 }
