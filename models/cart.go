@@ -110,7 +110,7 @@ func AddCartItem(cartID string, variantID string, subscriptionID string) (Cart, 
 	}
 
 	item.Totals.MonthlyPrice = item.Subscription.RegularPrice
-	item.Totals.OneTimePrice = item.Product.Variants[0].RegularPrice
+	item.Totals.OneTimePrice = item.Product.Variants[0].DiscountedPrice
 
 	cart.Items = append(cart.Items, item)
 	cart.Totals = updateCartTotals(cart.Items)
